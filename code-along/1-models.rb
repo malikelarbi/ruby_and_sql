@@ -11,10 +11,67 @@ Company.destroy_all
 # 1a. check out the schema file
 # 1b. check out the model file
 
+puts Company.all.count
+
 # 2. create new companies
+values = {
+    name: "Apple",
+    url: "https://apple.com",
+    city: "Cupertino",
+    state: "CA"
+}
+
+company = Company.new(values)
+company.save
+
+puts Company.all.count
+
+values = {
+    name: "Amazon",
+    url: "https://amazon.com",
+    city: "Seattle",
+    state: "WA"
+}
+
+company = Company.new(values)
+company.save
+
+puts Company.all.count
+
+company = Company.new(values)
+# company.write_attribute(:name, "Tesla")
+# company.write_attribute(:url, "https://tesla.com")
+# company.write_attribute(:city, "Palo Alto")
+# company.write_attribute(:state, "CA")
+
+company.name = "Tesla"
+company.url = "https://tesla.com"
+company.city = "Palo Alto"
+company.state = "CA"
+
+company.save
+
+puts Company.all.count
 
 # 3. query companies table
 
+# puts Company.all.inspect
+
+# companies = Company.where({state: "CA"})
+# puts companies.inspect
+
+# puts Company.where ({state: "CA", name: "Apple"}).count
+apple = Company.where({state: "CA", name: "Apple"})[0]
+# puts apple.inspect
+
 # 4. read column values from row
+# puts "#{apple.read_attribute(:name)} has a website: #{apple.read_attribute(:url)}"
+puts "#{apple.name} has a website #{apple.url}"
 
 # 5. update attribute value
+# apple.write_attribute(:slogan, "Think Different.")
+apple.slogan = "Think Different."
+apple.save
+
+puts apple.inspect
+
